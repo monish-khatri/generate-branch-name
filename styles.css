@@ -1,0 +1,52 @@
+body {
+    font-family: Arial, sans-serif;
+    background: url('bg.jpeg') no-repeat;
+    background-size: cover;
+    height: 74vh;
+    width: 74vh;
+}
+
+h3 {
+    text-align: center;
+    font-family: Tahoma, Arial, sans-serif;
+    color: #000000;
+    border-color: 2px solid #06D85F;
+    margin: 80px 0;
+}
+
+.box {
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.2);
+    padding: 15px;
+    border: 2px solid #fff;
+    border-radius: 20px/50px;
+    background-clip: padding-box;
+    text-align: center;
+}
+
+button {
+    font-size: 1em;
+    padding: 10px;
+    color: #000000;
+    border: 2px solid #06D85F;
+    border-radius: 20px/50px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+}
+button:hover {
+    background: #06D85F;
+}
+.footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #555;
+}
+
+.developer {
+    font-weight: bold;
+    color: #333;
+}

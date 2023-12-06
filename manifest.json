@@ -1,0 +1,26 @@
+{
+    "manifest_version": 3,
+    "name": "Branch Name Generator",
+    "version": "1.0",
+    "description": "Create github branch name from jira title.",
+    "permissions": ["activeTab"],
+    "action": {
+      "default_icon": {
+        "16": "magic-wand.png",
+        "48": "magic-wand.png",
+        "128": "magic-wand.png"
+      },
+      "default_popup": "popup.html"
+    },
+    "icons": {
+      "16": "magic-wand.png",
+      "48": "magic-wand.png",
+      "128": "magic-wand.png"
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content.js"]
+      }
+    ]
+}
