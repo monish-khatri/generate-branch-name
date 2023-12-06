@@ -4,7 +4,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         if (pageTitle) {
             var branchName = pageTitle.replace('- Jira', '').replace(/[{}\[\]()\/\\:;@#$%^&*!'"`]/g, '').toLowerCase().trim().replace(/\s+/g, '-').replace(/-+/g, '-');
             copyToClipboard(branchName);
-            showFormattedDialog('Branch Name Copied', '<b>' + branchName + '</b>');
+            showFormattedDialog('Branch Name Copied to Clipboard:', branchName);
         } else {
             alert('No title find');
         }
@@ -21,7 +21,7 @@ function copyToClipboard(text) {
 
 function showFormattedDialog(title, message) {
     const dialog = document.createElement('div');
-    dialog.innerHTML = `<p style="font-weight: bold">${title}</p><p>${message}</p>`;
+    dialog.innerHTML = `<p>${title}</p><p style="font-weight: bold">${message}</p>`;
 
     // Customize the styles as needed
     dialog.style.position = 'fixed';
