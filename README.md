@@ -3,8 +3,8 @@ Generate branch name from JIRA task
 
 # Setup
 
-## Download the extention
-- Download the extention from [https://github.com/monish-khatri/generate-branch-name/archive/refs/heads/main.zip](https://github.com/monish-khatri/generate-branch-name/archive/refs/heads/main.zip)
+## Download the Extension
+- Download the extension from [https://github.com/monish-khatri/generate-branch-name/archive/refs/heads/main.zip](https://github.com/monish-khatri/generate-branch-name/archive/refs/heads/main.zip)
 
 ## Load the Extension:
 - Open Chrome and go to [chrome://extensions/](chrome://extensions/).
