@@ -4,23 +4,26 @@
     "version": "1.0",
     "description": "Create github branch name from jira tasks.",
     "permissions": ["activeTab"],
+    "background": {
+      "service_worker": "assets/js/content.js"
+    },
     "action": {
       "default_icon": {
-        "16": "magic-wand.png",
-        "48": "magic-wand.png",
-        "128": "magic-wand.png"
+        "16": "assets/images/magic-wand.png",
+        "48": "assets/images/magic-wand.png",
+        "128": "assets/images/magic-wand.png"
       },
       "default_popup": "popup.html"
     },
     "icons": {
-      "16": "magic-wand.png",
-      "48": "magic-wand.png",
-      "128": "magic-wand.png"
+      "16": "assets/images/magic-wand.png",
+      "48": "assets/images/magic-wand.png",
+      "128": "assets/images/magic-wand.png"
     },
     "content_scripts": [
       {
         "matches": ["*://*.atlassian.net/*"],
-        "js": ["content.js"]
+        "js": ["assets/js/content.js"]
       }
     ]
 }
