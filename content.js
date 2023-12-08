@@ -1,12 +1,23 @@
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     if (request.action === 'generateBranchName') {
-        const pageTitle = document.title;
-        if (pageTitle) {
-            var branchName = pageTitle.replace('- Jira', '').replace(/[{}\[\]()\/\\:;@#$%^&*!'"`]/g, '').toLowerCase().trim().replace(/\s+/g, '-').replace(/-+/g, '-');
+        var pageTitle = document.title;
+        const queryString = window.location.search;
+        const params = new URLSearchParams(queryString);
+        const taskId = params.get('selectedIssue');
+
+        var branchName = '';
+        if (taskId) {
+            const substringToFind = "edit summary";
+            const button = document.querySelector(`button[aria-label*="${substringToFind}"]`);
+            pageTitle = `${taskId} ${button.getAttribute('aria-label')}`;
+            branchName = createBranchName(pageTitle.replace("- " + substringToFind, ''))
+        } else if(pageTitle) {
+            branchName = createBranchName(pageTitle.replace('- Jira', ''))
+        }
+
+        if(branchName) {
             copyToClipboard(branchName);
-            showFormattedDialog('Branch Name Copied to Clipboard:', branchName);
-        } else {
-            alert('No title find');
+            showFormattedDialog(branchName);
         }
     }
 });
@@ -19,22 +30,20 @@ function copyToClipboard(text) {
     document.body.removeChild(textarea);
 }
 
-function showFormattedDialog(title, message) {
+function showFormattedDialog(message) {
     const dialog = document.createElement('div');
-    dialog.innerHTML = `<p>${title}</p><p style="font-weight: bold">${message}</p>`;
+    dialog.innerHTML = `<p>Branch Name Copied to Clipboard:</p><p style="font-weight: bold">${message}</p>`;
 
     // Customize the styles as needed
-    dialog.style.position = 'fixed';
-    dialog.style.top = '50%';
-    dialog.style.left = '50%';
-    dialog.style.transform = 'translate(-50%, -50%)';
-    dialog.style.background = '#fff';
-    dialog.style.padding = '20px';
-    dialog.style.border = '1px solid #ccc';
+    dialog.style.cssText = "position: fixed;top: 50%;left: 50%;transform: translate(-50%, -50%);background: #fff;padding: 20px;border: 1px solid #ccc;z-index: 999;";
 
     document.body.appendChild(dialog);
 
     setTimeout(() => {
       document.body.removeChild(dialog);
     }, 3000);  // Remove the dialog after 3 seconds (adjust as needed)
-  }
+}
+
+function createBranchName(taskTitle){
+    return  taskTitle.replace(/[{}\[\]()\/\\:;@#$%^&*!'"`]/g, '').toLowerCase().trim().replace(/\s+/g, '-').replace(/-+/g, '-');
+}
