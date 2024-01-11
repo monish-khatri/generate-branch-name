@@ -12,6 +12,6 @@ Generate branch name from JIRA task
 - Click `Load unpacked` and select your extension folder.
 
 ## Test Your Extension:
-- Open a Jira page.
-- Click on the extension icon in the Chrome toolbar.
+- Open a Jira page/Modal.
+- Click on the extension icon in the Chrome toolbar or `Generate Branch Name` option in Context Menu.
 - Click `Generate` button in the popup.
