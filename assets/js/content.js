@@ -55,7 +55,12 @@ function showFormattedDialog(message) {
 }
 
 function createBranchName(taskTitle){
-    return  taskTitle.replace(/[{}\[\]()\/\\:;@#$%^&*!'"`]/g, '').toLowerCase().trim().replace(/\s+/g, '-').replace(/-+/g, '-');
+    return taskTitle
+      .replace(/[{}\[\]()\/\\:;@#$%^&*!'"`]/g, '') // Remove special characters
+      .toLowerCase() // Convert to lowercase
+      .trim() // Trim leading and trailing spaces
+      .replace(/\s+/g, '-') // Replace spaces with hyphens
+      .replace(/-+/g, '-') // Replace consecutive hyphens with a single hyphen
 }
 
 function isDarkColor(color) {
