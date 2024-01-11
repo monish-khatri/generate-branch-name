@@ -1,3 +1,4 @@
+const uniqueMenuId = 'generate_branch_name_id'
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     if (request.action === 'generateBranchName') {
         var pageTitle = document.title;
@@ -21,6 +22,29 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         }
     }
 });
+
+chrome.contextMenus.create({
+    title: "Generate Branch Name",
+    contexts: ["all"],
+    id: uniqueMenuId
+});
+
+chrome.contextMenus.onClicked.addListener(function(info, tab) {
+    if (info.menuItemId === uniqueMenuId) {
+        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, { action: 'generateBranchName' });
+        });
+    }
+});
+
+function createBranchName(taskTitle){
+    return taskTitle
+      .replace(/[{}\[\]()\/\\:;@#$%^&*!'"`]/g, '') // Remove special characters
+      .toLowerCase() // Convert to lowercase
+      .trim() // Trim leading and trailing spaces
+      .replace(/\s+/g, '-') // Replace spaces with hyphens
+      .replace(/-+/g, '-') // Replace consecutive hyphens with a single hyphen
+}
 
 function copyToClipboard(text) {
     const textarea = document.createElement('textarea');
@@ -52,15 +76,6 @@ function showFormattedDialog(message) {
     setTimeout(() => {
       document.body.removeChild(dialog);
     }, 3000);
-}
-
-function createBranchName(taskTitle){
-    return taskTitle
-      .replace(/[{}\[\]()\/\\:;@#$%^&*!'"`]/g, '') // Remove special characters
-      .toLowerCase() // Convert to lowercase
-      .trim() // Trim leading and trailing spaces
-      .replace(/\s+/g, '-') // Replace spaces with hyphens
-      .replace(/-+/g, '-') // Replace consecutive hyphens with a single hyphen
 }
 
 function isDarkColor(color) {
