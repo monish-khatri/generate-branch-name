@@ -44,6 +44,7 @@ function createBranchName(taskTitle){
       .trim() // Trim leading and trailing spaces
       .replace(/\s+/g, '-') // Replace spaces with hyphens
       .replace(/-+/g, '-') // Replace consecutive hyphens with a single hyphen
+      .replace(/_/g, '-'); // Replace underscores with hyphens
 }
 
 function copyToClipboard(text) {
